@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 
-console.log('-> Retrieving Input Data - input.txt');
+console.log('');
+console.log('= Retrieving Input Data - input.txt');
 let data;
 try {
     data = fs.readFileSync(__dirname + '/input.txt', 'utf8');
@@ -12,53 +13,69 @@ try {
 
 const instructions = data.split('\n');
 
-console.log('-> Cracking Password');
-const solution = solve(instructions);
+console.log('');
+console.log('= Part 01 ====');
+
+console.log(' -> Cracking Password');
+let solution = solve(instructions);
+
+console.log(' -> Password: ' + solution);
+
 
 console.log('');
-console.log('-> Password: ' + solution);
+console.log('= Part 02 ====');
 
+console.log(' -> Cracking Password with method "0x434C49434B"');
+solution = solve(instructions, true);
 
-function solve(instructions){
+console.log(' -> Password: ' + solution);
+
+function solve(instructions, part2 = false){
 
     let position = 50;
     let password = 0;
 
     instructions.forEach(instruction => {
 
-        if (instruction === ''){ return; }
-
         // Extract direction and clicks
         const direction = instruction.substring(0, 1);
         const clicks = parseInt(instruction.substring(1));
 
+        // Record position before applying instructions
+        const oldPosition = position;
+
         // Calculate new position
         position = (direction === 'L') ? (position - clicks) : (position + clicks);
 
-        // Re-adjust Position
-        position = readjustTurns(position);
+        // Save temporary position
+        let tempPosition = position;
 
-        // Check if 0, therefore increase count for password
+        // Recalculate Position and Passes.
+        let passes = Math.abs(Math.floor(position / 100));
+        position = position % 100;
+
+        // Reset position
+        if (position < 0){
+            position += 100;
+        }
+
+        // Remove one of the passes
+        if ((oldPosition === 0 && (direction === 'L')) ||
+            ((tempPosition % 100 === 0) && (direction === 'R') &&
+            passes)){
+            passes--;
+        }
+
+        // Count landing on zero
         if (position === 0){
             password++;
         }
 
+        // Add passes to password
+        if (part2){
+            password += passes;
+        }
     })
 
     return password;
-}
-
-
-// Accounts for whole (and multiple) turns of the dial
-function readjustTurns(position){
-    while (position < 0 || position > 99){
-        if (position < 0){
-            position += 100;
-
-        } else if (position > 99){
-            position -= 100;
-        }
-    }
-
-    return position;
 }
