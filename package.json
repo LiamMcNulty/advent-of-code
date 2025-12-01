@@ -1,0 +1,23 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/LiamMcNulty/advent-of-code#readme",
+  "bugs": {
+    "url": "https://github.com/LiamMcNulty/advent-of-code/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiamMcNulty/advent-of-code.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "solve": "bash solve.sh"
+  },
+  "dependencies": {
+    "minimist": "^1.2.8"
+  }
+}
