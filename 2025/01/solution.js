@@ -60,8 +60,8 @@ function solve(instructions, part2 = false){
         }
 
         // Remove one of the passes
-        if ((oldPosition === 0 && (direction === 'L')) ||
-            ((tempPosition % 100 === 0) && (direction === 'R') &&
+        if (((oldPosition === 0 && (direction === 'L')) ||
+            ((tempPosition % 100 === 0) && (direction === 'R')) &&
             passes)){
             passes--;
         }
