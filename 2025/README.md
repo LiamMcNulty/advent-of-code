@@ -11,3 +11,4 @@ Collect stars by solving puzzles. Two puzzles will be made available on each day
 
 ### Days
 - [Day 1: Secret Entrance](01/)
+- [Day 2: Gift Shop](02/)
