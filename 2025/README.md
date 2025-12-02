@@ -1,5 +1,5 @@
 # Advent of Code - 2025
-[![Completion Status](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LiamMcNulty/advent-of-code/tree/main/2025/.github/badges/completion.json)](https://github.com/LiamMcNulty/advent-of-code/tree/main/2025)
+[![Completion Status](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LiamMcNulty/advent-of-code/refs/heads/main/2025/.github/badges/completion.json)](https://github.com/LiamMcNulty/advent-of-code/tree/main/2025)
 
 The Elves have good news and bad news.
 
