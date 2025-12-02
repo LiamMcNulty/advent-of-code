@@ -51,7 +51,7 @@ function solve(idRanges, part2 = false){
         const endID = parseInt(idRange[1]);
 
         // Iterate through range
-        for(let id = startID; id < endID + 1; id++){
+        for(let id = startID; id !== endID; id++){
 
             // Grab a string version of the id
             const stringID = id.toString();
@@ -59,9 +59,9 @@ function solve(idRanges, part2 = false){
             // Part 2 Solution
             if (part2){
 
-                // Fix to start and beginning of line with '^' and '$'
+                // Fix to start and end of line with '^' and '$'
                 // Capture any digits with parenthesis
-                // Match again at least once with '\1+'
+                // Match captured digits at least once with '\1+'
                 let regex = /^(\d+)\1+$/;
                 const isInvalid = regex.test(stringID);
 
