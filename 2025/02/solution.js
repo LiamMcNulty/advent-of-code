@@ -18,24 +18,28 @@ console.log('');
 console.log('= Part 01 ====');
 
 console.log(' -> Determining Invalid IDs');
-const invalidIDs = solve(idRanges);
+let invalidIDs = solve(idRanges);
 console.log(' -> Found ' + invalidIDs.length + ' invalid IDs');
 
 console.log(' -> Summing IDs');
-const total = invalidIDs.reduce((sum, value) => sum + value, 0);
+let total = invalidIDs.reduce((sum, value) => sum + value, 0);
 
 console.log(' -> Total: ' + total);
 
 
-// console.log('');
-// console.log('= Part 02 ====');
+console.log('');
+console.log('= Part 02 ====');
 
-// console.log(' -> Cracking Password with method "0x434C49434B"');
-// solution = solve(instructions, true);
+console.log(' -> Determining Invalid IDs');
+invalidIDs = solve(idRanges, true);
+console.log(' -> Found ' + invalidIDs.length + ' invalid IDs');
 
-// console.log(' -> Password: ' + solution);
+console.log(' -> Summing IDs');
+total = invalidIDs.reduce((sum, value) => sum + value, 0);
 
-function solve(idRanges){
+console.log(' -> Total: ' + total);
+
+function solve(idRanges, part2 = false){
 
     let invalidIDs = [];
 
@@ -46,26 +50,41 @@ function solve(idRanges){
         const startID = parseInt(idRange[0]);
         const endID = parseInt(idRange[1]);
 
-        // console.log({ startID, endID });
-
         // Iterate through range
         for(let id = startID; id < endID + 1; id++){
 
+            // Grab a string version of the id
             const stringID = id.toString();
 
-            // Must be even number length to be invalid (two
-            // sets of equal length number)
-            if ((stringID.length % 2) !== 0){
-                continue;
-            }
+            // Part 2 Solution
+            if (part2){
 
-            // Split id evenly and check if they match
-            const idFirstHalf = stringID.slice(0, stringID.length / 2);
-            const idSecondHalf = stringID.slice(stringID.length / 2, stringID.length);
+                // Fix to start and beginning of line with '^' and '$'
+                // Capture any digits with parenthesis
+                // Match again at least once with '\1+'
+                let regex = /^(\d+)\1+$/;
+                const isInvalid = regex.test(stringID);
 
-            if (idFirstHalf === idSecondHalf){
-                // console.log({ id });
-                invalidIDs.push(id);
+                if (isInvalid){
+                    invalidIDs.push(id);
+                }
+
+            // Part 1 Solution
+            } else {
+
+                // Must be even number length to be invalid (two
+                // sets of equal length number)
+                if ((stringID.length % 2) !== 0){
+                    continue;
+                }
+
+                // Split id evenly and check if they match
+                const idFirstHalf = stringID.slice(0, stringID.length / 2);
+                const idSecondHalf = stringID.slice(stringID.length / 2, stringID.length);
+
+                if (idFirstHalf === idSecondHalf){
+                    invalidIDs.push(id);
+                }
             }
         }
     });

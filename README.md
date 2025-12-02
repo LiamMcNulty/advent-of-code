@@ -8,3 +8,4 @@ npm run solve -- -y 2025 -d 01
 ## Solution
 - [2025](2025/)
   - [Day 01 - Secret Entrance](2025/01/)
+  - [Day 02: Gift Shop](2025/02/)
