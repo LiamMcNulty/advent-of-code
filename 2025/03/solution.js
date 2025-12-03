@@ -17,10 +17,8 @@ const batteryBanks = data.split('\n');
 console.log('');
 console.log('= Part 01 ====');
 
-console.log(' -> Determining Maximum Joltag Per Bank');
+console.log(' -> Determining Maximum Joltage Per Bank');
 let jolts = solve(batteryBanks);
-
-console.log({jolts});
 
 console.log(' -> Summing Total Output Joltage');
 let total = jolts.reduce((sum, value) => sum + parseInt(value), 0);
@@ -28,70 +26,48 @@ let total = jolts.reduce((sum, value) => sum + parseInt(value), 0);
 console.log(' -> Total: ' + total);
 
 
-// console.log('');
-// console.log('= Part 02 ====');
-
-// console.log(' -> Determining Invalid IDs');
-// invalidIDs = solve(idRanges, true);
-// console.log(' -> Found ' + invalidIDs.length + ' invalid IDs');
-
-// console.log(' -> Summing IDs');
-// total = invalidIDs.reduce((sum, value) => sum + value, 0);
-
-// console.log(' -> Total: ' + total);
-
 function solve(batteryBanks, part2 = false){
     // Where we'll save each banks maximum joltage
     let maximumBankJoltage = [];
 
     // Iterate each bank
     batteryBanks.forEach(batteryBank => {
-        // console.log({batteryBank})
 
-        // Iterate each battery for our first battery position and joltage
+        // Split batteries so we can iterate
         batteryBank = batteryBank.split('');
-        let firstMaximumJoltage = 0;
-        let firstPosition = 0;
 
-        // batteryBank.length - 1 as the first value cannot be the
-        // last battery in the bank
-        for (let i = 0; i < batteryBank.length - 1; i++){
-            const batteryJoltage = parseInt(batteryBank[i]);
+        // Get first joltage value. 'batteryBank.length - 1' for end index
+        // as the first value cannot be the last battery in the bank
+        const { maxJoltage: firstMaxVoltage, position: firstPosition } = getMaxJoltage(0, batteryBank.length - 1, batteryBank);
 
-            // Set new maximum and save position
-            if (batteryJoltage > firstMaximumJoltage){
-                firstMaximumJoltage = batteryJoltage;
-                firstPosition = i;
-            }
-
-            // 9 is the highest we can get so end loop
-            if (batteryJoltage === 9){ break; }
-        }
-
-        // console.log({firstMaximumJoltage, firstPosition});
-
-        // Iterate each battery for our second battery joltage from the
-        // position of the first
-        let secondMaximumJoltage = 0;
-        let secondPosition = 0;
-        for (let i = firstPosition + 1; i < batteryBank.length; i++){
-            const batteryJoltage = parseInt(batteryBank[i]);
-
-            // Set new maximum and save position
-            if (batteryJoltage > secondMaximumJoltage){
-                secondMaximumJoltage = batteryJoltage;
-                secondPosition = i;
-            }
-
-            // 9 is the highest we can get so end loop
-            if (batteryJoltage === 9){ break; }
-        }
-
-        // console.log({secondMaximumJoltage, secondPosition})
+        // Get second jolage value. Start after the position of the first joltage value
+        const { maxJoltage: secondMaximumJoltage, position: secondPosition } = getMaxJoltage(firstPosition + 1, batteryBank.length, batteryBank);
 
         // Add the maximum joltage for the bank
-        maximumBankJoltage.push('' + firstMaximumJoltage + secondMaximumJoltage);
+        maximumBankJoltage.push('' + firstMaxVoltage + secondMaximumJoltage);
     });
 
     return maximumBankJoltage;
+}
+
+function getMaxJoltage(startIndex, endIndex, batteryBank){
+
+    // Set both values to 0 as a starting point
+    let maxJoltage = 0;
+    let position = 0;
+
+    for (let i = startIndex; i < endIndex; i++){
+        const batteryJoltage = parseInt(batteryBank[i]);
+
+        // Set new maximum and save position
+        if (batteryJoltage > maxJoltage){
+            maxJoltage = batteryJoltage;
+            position = i;
+        }
+
+        // 9 is the highest we can get so end loop
+        if (batteryJoltage === 9){ break; }
+    }
+
+    return { maxJoltage, position }
 }
