@@ -26,25 +26,52 @@ let total = jolts.reduce((sum, value) => sum + parseInt(value), 0);
 console.log(' -> Total: ' + total);
 
 
-function solve(batteryBanks, part2 = false){
-    // Where we'll save each banks maximum joltage
-    let maximumBankJoltage = [];
+console.log('');
+console.log('= Part 02 ====');
 
-    // Iterate each bank
-    batteryBanks.forEach(batteryBank => {
+console.log(' -> Determining Maximum Joltage Per Bank');
+jolts = solve(batteryBanks, true);
+
+console.log(' -> Summing Total Output Joltage');
+total = jolts.reduce((sum, value) => sum + parseInt(value), 0);
+
+console.log(' -> Total: ' + total);
+
+
+function solve(batteryBanks, part2 = false){
+    // Iterate each bank and return the maximum joltage for each
+    let maximumBankJoltage = batteryBanks.map(batteryBank => {
 
         // Split batteries so we can iterate
         batteryBank = batteryBank.split('');
 
-        // Get first joltage value. 'batteryBank.length - 1' for end index
-        // as the first value cannot be the last battery in the bank
-        const { maxJoltage: firstMaxVoltage, position: firstPosition } = getMaxJoltage(0, batteryBank.length - 1, batteryBank);
+        // Set the amount of batteries we are going to use
+        const batteriesRequired = (part2) ? 12 : 2;
 
-        // Get second jolage value. Start after the position of the first joltage value
-        const { maxJoltage: secondMaximumJoltage, position: secondPosition } = getMaxJoltage(firstPosition + 1, batteryBank.length, batteryBank);
+        // Set some variables to use in our while loop to keep track of progress and
+        // to get us started
+        let batteryJoltages = '';
+        let startIndex = 0;
+        let endIndex = batteryBank.length - batteriesRequired;
+        let batteriesRemaining = batteriesRequired - batteryJoltages.length;
 
-        // Add the maximum joltage for the bank
-        maximumBankJoltage.push('' + firstMaxVoltage + secondMaximumJoltage);
+        // Loop until we have no batteries left to find
+        while(batteriesRemaining){
+
+            // Get maximum joltage and add to string
+            let { maxJoltage, position } = getMaxJoltage(startIndex, endIndex, batteryBank);
+            batteryJoltages += maxJoltage;
+
+            // Set variables for next loop.
+            // Start after the position of the first joltage value and
+            // decrease our battery reamining count
+            startIndex = position + 1;
+            batteriesRemaining--;
+            endIndex = batteryBank.length - batteriesRemaining;
+
+        }
+
+        return batteryJoltages;
     });
 
     return maximumBankJoltage;
@@ -56,7 +83,7 @@ function getMaxJoltage(startIndex, endIndex, batteryBank){
     let maxJoltage = 0;
     let position = 0;
 
-    for (let i = startIndex; i < endIndex; i++){
+    for (let i = startIndex; i < endIndex + 1; i++){
         const batteryJoltage = parseInt(batteryBank[i]);
 
         // Set new maximum and save position
