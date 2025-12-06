@@ -1,6 +1,4 @@
 # Advent of Code - 2025
-[![Completion Status](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LiamMcNulty/advent-of-code/refs/heads/main/2025/.github/badges/completion.json)](https://github.com/LiamMcNulty/advent-of-code/tree/main/2025)
-
 The Elves have good news and bad news.
 
 The good news is that they've discovered project management! This has given them the tools they need to prevent their usual Christmas emergency. For example, they now know that the North Pole decorations need to be finished soon so that other critical tasks can start on time.
@@ -11,7 +9,10 @@ To save Christmas, the Elves need **you** to **finish decorating the North Pole 
 
 Collect stars by solving puzzles. Two puzzles will be made available on each day; the second puzzle is unlocked when you complete the first. Each puzzle grants **one star**. Good luck!
 
-### Days
+## Puzzles
+[![Completion Status](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LiamMcNulty/advent-of-code/refs/heads/main/2025/.github/badges/completion.json)](https://github.com/LiamMcNulty/advent-of-code/tree/main/2025)
 - [Day 01 - Secret Entrance](01/) ⭐️⭐️
 - [Day 02 - Gift Shop](02/) ⭐️⭐️
 - [Day 03 - Lobby](03/) ⭐️⭐️
+- [Day 04 - Printing Department](04/) ⭐️
+
