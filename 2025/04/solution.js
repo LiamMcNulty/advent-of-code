@@ -23,14 +23,32 @@ let accessibleRolls = solve(paperRollGrid);
 console.log(' -> Total Accessible Paper Rolls: ' + accessibleRolls);
 
 
+console.log('');
+console.log('= Part 02 ====');
+
+console.log(' -> Determining Accessible Paper Rolls Recursively');
+accessibleRolls = solve(paperRollGrid, true);
+
+console.log(' -> Total Accessible Paper Rolls: ' + accessibleRolls);
+
+
 function solve(paperRollGrid, part2 = false){
+
+    // Convert to array of arrays for easier access when doing the count
+    paperRollGrid = paperRollGrid.map(paperRollRow => { return paperRollRow.split('')});
+
+    // Count all accessible rolls
+    return countAccessibleRolls(paperRollGrid, part2);
+}
+
+function countAccessibleRolls(paperRollGrid, part2){
+
+    // Duplicate by value
+    let paperRollGridMarked = JSON.parse(JSON.stringify(paperRollGrid));
 
     // Get the size (in terms of array index) of the grid we're working with
     const gridIndexHeight = paperRollGrid.length - 1;
     const gridIndexWidth = paperRollGrid[0].length - 1;
-
-    // Convert to array of arrays for easier access when doing the count
-    paperRollGrid = paperRollGrid.map(paperRollRow => { return paperRollRow.split('')});
 
     // Setup count
     let count = 0;
@@ -47,9 +65,34 @@ function solve(paperRollGrid, part2 = false){
             const adjacentRollPositions = getAdjacentPositions(x, y, gridIndexWidth, gridIndexHeight);
             const adjacentRollCount = countAdjacentRolls(adjacentRollPositions, paperRollGrid);
 
-            if (adjacentRollCount < 4) count++;
+            // Increse count and mark result grid with x
+            if (adjacentRollCount < 4){
+                count++;
+                paperRollGridMarked[y][x] = 'x';
+            }
         });
     });
+
+    if (part2){
+
+        // Create the new grid with accessible rolls removed
+        let rollsRemoved = false;
+        paperRollGridMarked = paperRollGridMarked.map(rollRow => {
+            return rollRow.map(roll => {
+                if ((roll === 'x')){
+                    rollsRemoved = true;
+                    return '.';
+                } else {
+                    return roll;
+                }
+            })
+        })
+
+        // Recursively remove rolls until we no longer can remove any
+        if (rollsRemoved){
+            count += countAccessibleRolls(paperRollGridMarked, true);
+        }
+    }
 
     return count;
 }

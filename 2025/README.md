@@ -14,5 +14,5 @@ Collect stars by solving puzzles. Two puzzles will be made available on each day
 - [Day 01 - Secret Entrance](01/) ⭐️⭐️
 - [Day 02 - Gift Shop](02/) ⭐️⭐️
 - [Day 03 - Lobby](03/) ⭐️⭐️
-- [Day 04 - Printing Department](04/) ⭐️
+- [Day 04 - Printing Department](04/) ⭐️⭐️
 
