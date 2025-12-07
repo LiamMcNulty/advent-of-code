@@ -11,7 +11,9 @@ try {
     return;
 }
 
-const paperRollGrid = data.split('\n');
+// Convert to array of arrays for easier manipulation and access during puzzle
+let paperRollGrid = data.split('\n');
+paperRollGrid = paperRollGrid.map(paperRollRow => { return paperRollRow.split('')});
 
 
 console.log('');
@@ -33,15 +35,6 @@ console.log(' -> Total Accessible Paper Rolls: ' + accessibleRolls);
 
 
 function solve(paperRollGrid, part2 = false){
-
-    // Convert to array of arrays for easier access when doing the count
-    paperRollGrid = paperRollGrid.map(paperRollRow => { return paperRollRow.split('')});
-
-    // Count all accessible rolls
-    return countAccessibleRolls(paperRollGrid, part2);
-}
-
-function countAccessibleRolls(paperRollGrid, part2){
 
     // Duplicate by value
     let paperRollGridMarked = JSON.parse(JSON.stringify(paperRollGrid));
@@ -77,7 +70,7 @@ function countAccessibleRolls(paperRollGrid, part2){
 
         // Create the new grid with accessible rolls removed
         let rollsRemoved = false;
-        paperRollGridMarked = paperRollGridMarked.map(rollRow => {
+        paperRollGrid = paperRollGridMarked.map(rollRow => {
             return rollRow.map(roll => {
                 if ((roll === 'x')){
                     rollsRemoved = true;
@@ -88,9 +81,9 @@ function countAccessibleRolls(paperRollGrid, part2){
             })
         })
 
-        // Recursively remove rolls until we no longer can remove any
+        // Recursively remove rolls until we no longer can remove anymore
         if (rollsRemoved){
-            count += countAccessibleRolls(paperRollGridMarked, true);
+            count += solve(paperRollGrid, true);
         }
     }
 
