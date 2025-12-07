@@ -36,6 +36,35 @@ console.log(' -> Total Accessible Paper Rolls: ' + accessibleRolls);
 
 function solve(paperRollGrid, part2 = false){
 
+    // Remove removable rolls and count
+    let { count, paperRollGridMarked } = removeAccessibleRolls(paperRollGrid);
+
+    if (part2){
+
+        // Create the new grid with accessible rolls removed
+        let rollsRemoved = false;
+        paperRollGrid = paperRollGridMarked.map(rollRow => {
+            return rollRow.map(roll => {
+                if ((roll === 'x')){
+                    rollsRemoved = true;
+                    return '.';
+                } else {
+                    return roll;
+                }
+            })
+        })
+
+        // Recursively remove rolls until we no longer can remove anymore
+        if (rollsRemoved){
+            count += solve(paperRollGrid, true);
+        }
+    }
+
+    return count;
+}
+
+function removeAccessibleRolls(paperRollGrid){
+
     // Duplicate by value
     let paperRollGridMarked = JSON.parse(JSON.stringify(paperRollGrid));
 
@@ -66,28 +95,7 @@ function solve(paperRollGrid, part2 = false){
         });
     });
 
-    if (part2){
-
-        // Create the new grid with accessible rolls removed
-        let rollsRemoved = false;
-        paperRollGrid = paperRollGridMarked.map(rollRow => {
-            return rollRow.map(roll => {
-                if ((roll === 'x')){
-                    rollsRemoved = true;
-                    return '.';
-                } else {
-                    return roll;
-                }
-            })
-        })
-
-        // Recursively remove rolls until we no longer can remove anymore
-        if (rollsRemoved){
-            count += solve(paperRollGrid, true);
-        }
-    }
-
-    return count;
+    return { count, paperRollGridMarked }
 }
 
 function getAdjacentPositions(x, y, maxXIndex, maxYIndex){
