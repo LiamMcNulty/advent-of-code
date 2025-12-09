@@ -16,4 +16,4 @@ Collect stars by solving puzzles. Two puzzles will be made available on each day
 - [Day 03 - Lobby](03/) ⭐️⭐️
 - [Day 04 - Printing Department](04/) ⭐️⭐️
 - [Day 05 - Cafeteria](05/) ⭐️⭐️
-- [Day 06 - Trash Compactor](06/) ⭐️
+- [Day 06 - Trash Compactor](06/) ⭐️⭐️

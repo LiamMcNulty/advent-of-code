@@ -12,4 +12,4 @@ npm run solve -- -y 2025 -d 01
   - [Day 03 - Lobby](2025/03/) ⭐️⭐️
   - [Day 04 - Printing Department](2025/04/) ⭐️⭐️
   - [Day 05 - Cafeteria](2025/05/) ⭐️⭐️
-  - [Day 06 - Trash Compactor](2025/06/) ⭐️
+  - [Day 06 - Trash Compactor](2025/06/) ⭐️⭐️
