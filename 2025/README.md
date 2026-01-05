@@ -9,6 +9,8 @@ To save Christmas, the Elves need **you** to **finish decorating the North Pole 
 
 Collect stars by solving puzzles. Two puzzles will be made available on each day; the second puzzle is unlocked when you complete the first. Each puzzle grants **one star**. Good luck!
 
+Source: https://adventofcode.com/2025
+
 ## Puzzles
 [![Completion Status](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LiamMcNulty/advent-of-code/refs/heads/main/2025/.github/badges/completion.json)](https://github.com/LiamMcNulty/advent-of-code/tree/main/2025)
 - [Day 01 - Secret Entrance](01/) ⭐️⭐️
@@ -17,3 +19,9 @@ Collect stars by solving puzzles. Two puzzles will be made available on each day
 - [Day 04 - Printing Department](04/) ⭐️⭐️
 - [Day 05 - Cafeteria](05/) ⭐️⭐️
 - [Day 06 - Trash Compactor](06/) ⭐️⭐️
+- [Day 07 - Laboratories](07/) ⭐️
+- Day 08 - Playground
+- Day 09 - Movie Theater
+- Day 10 - Factory
+- Day 11 - Reactor
+- Day 12 - Christmas Tree Farm
